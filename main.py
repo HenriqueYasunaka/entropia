@@ -8,6 +8,7 @@ def menu():
     print("1 - Variação da temperatura")
     print("2 - Variação do volume")
     print("3 - Variação da pressão")
+    print("4 - Calcular n")
     return int(input("Opção: "))
 
 
@@ -65,9 +66,20 @@ def val_press():
     deltaS = -n * R * math.log(Pf / Pi)
     print(f"Variação da Entropia (mudança de pressão): {deltaS:.2f} J/K")
 
+def calc_n():
+    P = float(input("Digite o valor da pressao: "))
+    P = P * 101325
+    V = float(input("Digite o valor do volume em m³: "))
+    T = float(input("Digite a temperatura em Kelvin: "))
+    if T <= 0:
+        raise ValueError("A temperatura deve ser maior que zero Kelvin.")
+    n = (P * V) / (R * T)
+    print(f"O número de mols é: {n:.2f} mol")
+
+
 
 def main():
-    print("Programa iniciado")
+    print("\n")
     opcao = menu()
 
     if opcao == 1:
@@ -76,6 +88,9 @@ def main():
         val_vol()
     elif opcao == 3:
         val_press()
+    elif opcao == 4:
+        calc_n()
+        main()
     else:
         print("Opção inexistente")
 
